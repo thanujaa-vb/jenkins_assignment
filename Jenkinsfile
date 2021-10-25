@@ -5,7 +5,7 @@ node{
     }
     stage('push image'){
     docker.withRegistry('https://registry.hub.docker.com', 'dockerHub'){
-        def customImage= docker.build("dockerwebapp")
+        def customImage= docker.build("dockerhub/dockerwebapp")
         customImage.push()
     }
     }
