@@ -2,7 +2,7 @@ pipeline {
     agent any  
     environment{     
         dockerImage=""     
-        registry="thanu123456/jenkinsimage"   
+        registry="thanu123456/build-image"   
         registryCredential = "dockerHub"  
         }   
         stages {    
@@ -22,17 +22,13 @@ pipeline {
                                 }
                     }
                                stage('deploy') {  
-                                       steps {           
+                                       steps { 
+                                            script {      
                                               bat 'docker ps -f name=jenkinsImageContainer '        
-                                              bat 'docker container ls -a -fname=jenkinsImageContainer'     
+                                              bat 'docker container ls -a -fname=jenkinsImageContainer'  
+                                                dockerImage.run("-p 3000:3000 --rm --name jenkinsImageContainer") 
+                                                        } 
                                              }       
-                                        }       
-                                stage('Docker Run') { 
-                                       steps{           
-                                              script {     
-                                                     dockerImage.run("-p 3000:3000 --rm --name jenkinsImageContainer") 
-                                                        }     
-                                                    }     
-                                           }   
+                               }
         }
 }
