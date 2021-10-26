@@ -24,9 +24,9 @@ pipeline {
                                stage('deploy') {  
                                        steps { 
                                             script {      
-                                              bat 'docker ps -f name=jenkinsImageContainer '        
-                                              bat 'docker container ls -a -fname=jenkinsImageContainer'  
-                                                dockerImage.run("-p 3000:3000 --rm --name jenkinsImageContainer") 
+                                              bat 'docker ps -f name=jenkinsContainer '        
+                                              bat 'docker container ls -a -fname=jenkinsContainer'  
+                                                dockerImage.run("-p 3000:3000 --rm --name jenkinsContainer") 
                                                         } 
                                              }       
                                }
